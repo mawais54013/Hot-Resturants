@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>View Tables</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1>View All Tables</h1>
+      <h3></h3>
+      <hr>
+      <a href="/add"><button class="btn btn-primary btn-lg"><span class="fa fa-plus"></span> Add Reservation </button></a>
+      <a href="/"><button class="btn btn-primary btn-lg"><span class="fa fa-home"></span> Home</button></a>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        Current Reservations
+      </div>
+      <div class="card-body" id="display">
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        Wait List
+      </div>
+      <div class="card-body" id="waitlist">
+
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+    $.get("/api/guest", function (data) {
+ 
+      for(var j = 5; j<data.length; j++)
+      {
+        var section = $("<div>");
+        section.addClass("well");
+        section.attr("id", "guest-well-" + j);
+
+        section.append("<h2>Name: " + data[j].customerName + "</h2>");
+        section.append("<h3>Email: " + data[j].customerEmail + "</h3>");
+        section.append("<h3>ID: " + data[j].customerID + "</h3>");
+        section.append("<h3>Phone number: " + data[j].phoneNumber + "</h3>");
+        section.append("<p>------------------------------------------</p>");
+        section.append("<p></p>");
+       $("#waitlist").append(section); 
+
+      }
+
+      for (var i = 0; i < 5; i++) {
+        var section = $("<div>");
+        section.addClass("well");
+        section.attr("id", "guest-well-" + i);
+
+        section.append("<h2>Name: " + data[i].customerName + "</h2>");
+        section.append("<h3>Email: " + data[i].customerEmail + "</h3>");
+        section.append("<h3>ID: " + data[i].customerID + "</h3>");
+        section.append("<h3>Phone number: " + data[i].phoneNumber + "</h3>");
+        section.append("<p>------------------------------------------</p>");
+        section.append("<p></p>");
+    $("#display").append(section); 
+
+        }
+    });
+  </script>
+
+</body>
+
+</html>
