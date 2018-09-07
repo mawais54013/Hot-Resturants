@@ -47,7 +47,7 @@
     //   return res.json(guests);
     // });
 
-    $.post("/api/guest", function(req, res) {
+    $.get("/api/guest", function(req, res) {
       var guestArr = req.body;
 
       console.log(guestArr);
